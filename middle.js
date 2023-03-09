@@ -1,42 +1,43 @@
-// const assertArrayEqual = function(arr1, arr2) {
-//   if (eqArrays(arr1, arr2) === true)  {
-//     console.log(`✅ ✅ ✅ Assertion Passed`);
-//   } else {
-//     console.log(`🛑🛑🛑 Assertion Failed`);
-//   }
-// };
-
-// const eqArrays = function(arr1, arr2) {
-//   for (let i = 0; i < arr1.length; i++) {
-//     if (arr1[i] !== arr2[i]) {
-//       return false;
-//     }
-//   }
-//   return true;
-// };
-
-
-const middle = function(arr1) {
-  let arr2 = [];
-  if (arr1.length === 1 || arr1.length === 2) {
-    return arr2;
-  } else if (arr1.length % 2 === 0) {
-    let num = arr1.length / 2;
-    arr2.push(arr1[num - 1]);
-    arr2.push(arr1[num]);
-    return arr2;
-  } else if (arr1.length % 2 === 1) {
-    let num = Math.round(arr1.length / 2);
-    arr2.push(arr1[num - 1]);
-    return arr2;
+const eqArrays = function(arrayA, arrayB) {
+  if (arrayA.length === arrayB.length) {
+    for (let i = 0; i < arrayA.length; i++) {
+      if (arrayA[i] !== arrayB[i]) {
+        return false;
+      }
+    }
+    return true;
   }
+
+  return false;
 };
 
-module.exports = middle;
+const assertArraysEqual = function(arrayA, arrayB) {
 
-// assertArrayEqual(middle([1]), []);
-// assertArrayEqual(middle([1,2]), []);
-// assertArrayEqual(middle([1,2,3]), [2]);
-// assertArrayEqual(middle([1,2,3,4]), [2,3]);
-// assertArrayEqual(middle([1,2,3,4,5]), [3]);
-// assertArrayEqual(middle([1,2,3,4,5,6]), [3,4]);
+  let output = eqArrays(arrayA, arrayB) ? `✅Assertion Passed: [${arrayA}] === [${arrayB}]` : `⛔Assertion Failed: [${arrayA}] !== [${arrayB}]`;
+
+  console.log(output);
+};
+
+const middle = function(array) {
+  let middleIndex = Math.floor(array.length * 0.5);
+  let mid = [];
+  if (array.length >= 3){
+
+    if (array.length % 2 === 0) { 
+      mid.push(array[middleIndex - 1]);
+    }
+
+    mid.push(array[middleIndex]);
+
+  }   
+  return mid;
+};
+
+console.log(middle([1])) // => []
+console.log(middle([1, 2])) // => []
+
+console.log(middle([1, 2, 3])) // => [2]
+console.log(middle([1, 2, 3, 4, 5])) // => [3]
+
+console.log(middle([1, 2, 3, 4])) // => [2, 3]
+console.log(middle([1, 2, 3, 4, 5, 6])) // => [3, 4]
